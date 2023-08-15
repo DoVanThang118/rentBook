@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.demo.RentListController">
+   <children>
+      <Button layoutX="15.0" layoutY="361.0" mnemonicParsing="false" onAction="#backHome" text="Back" />
+      <TableView fx:id="tbRents" layoutX="15.0" layoutY="134.0" prefHeight="201.0" prefWidth="570.0">
+        <columns>
+          <TableColumn fx:id="tdId" prefWidth="47.0" text="Id" />
+          <TableColumn fx:id="tdBook" prefWidth="199.0" text="Name" />
+            <TableColumn fx:id="tdRentDate" prefWidth="145.0" text="Rent Date" />
+            <TableColumn fx:id="tdExpDate" prefWidth="111.0" text="Expired Date" />
+            <TableColumn fx:id="tdStatus" prefWidth="67.0" text="Action" />
+        </columns>
+      </TableView>
+      <Text layoutX="239.0" layoutY="50.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Rent">
+         <font>
+            <Font name="Arial Bold" size="40.0" />
+         </font>
+      </Text>
+   </children>
+</Pane>

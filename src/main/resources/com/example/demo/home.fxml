@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.demo.HomeController">
+   <children>
+      <Button layoutX="113.0" layoutY="361.0" mnemonicParsing="false" onAction="#goBook" text="Book" />
+      <Button layoutX="436.0" layoutY="361.0" mnemonicParsing="false" onAction="#goRent" text="My Rent" />
+      <TableView fx:id="tbBooks" layoutX="14.0" layoutY="14.0" prefHeight="316.0" prefWidth="240.0">
+        <columns>
+          <TableColumn fx:id="tdName" prefWidth="119.0" text="Name" />
+          <TableColumn fx:id="tdAuthor" prefWidth="120.0" text="Author" />
+        </columns>
+      </TableView>
+      <TableView fx:id="tbRents" layoutX="346.0" layoutY="14.0" prefHeight="316.0" prefWidth="240.0">
+        <columns>
+          <TableColumn fx:id="tdBook" prefWidth="154.0" text="Name" />
+          <TableColumn fx:id="tdExp" prefWidth="85.0" text="Date" />
+        </columns>
+      </TableView>
+      <Button onAction="#goRentBook" layoutX="265.0" layoutY="160.0" mnemonicParsing="false" text="Rent Book" />
+   </children>
+</Pane>
