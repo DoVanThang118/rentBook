@@ -1,5 +1,7 @@
 package com.example.demo.entities;
 
+import com.example.demo.BookEditController;
+import com.example.demo.RentExtendController;
 import com.example.demo.enums.RepoType;
 import com.example.demo.factory.RepositoryFactory;
 import com.example.demo.RentRepayController;
@@ -12,8 +14,8 @@ import java.util.Date;
 public class Rent {
     private Integer id;
     private Integer bookId;
-    private Date rentDate;
-    private Date expDate;
+    private String rentDate;
+    private String expDate;
     private Integer status;
     private String bookName;
     private String statusLabel;
@@ -21,16 +23,22 @@ public class Rent {
 
     public Rent(){}
 
-    public Rent(Integer id, Integer bookId, Date rentDate, Date expDate, Integer status) {
+    public Rent(Integer id, Integer bookId, String rentDate, String expDate, Integer status) {
         this.id = id;
         this.bookId = bookId;
         this.rentDate = rentDate;
         this.expDate = expDate;
         this.status = status;
-        this.repay = new Button("Repay");
+        this.repay = new Button(getStatusLabel());
         this.repay.setOnAction((event)->{
             try {
-                RentRepayController.repayBook = this;
+                if (status == 0){
+                    RentRepayController.repayBook = this;
+                    RentRepayController.repay();
+                }else {
+                    RentExtendController.extendBook = this;
+                    RentExtendController.extend();
+                }
             }catch (Exception e){
                 System.out.println(e.getMessage());
             }
@@ -53,19 +61,19 @@ public class Rent {
         this.bookId = bookId;
     }
 
-    public Date getRentDate() {
+    public String getRentDate() {
         return rentDate;
     }
 
-    public void setRentDate(Date rentDate) {
+    public void setRentDate(String rentDate) {
         this.rentDate = rentDate;
     }
 
-    public Date getExpDate() {
+    public String getExpDate() {
         return expDate;
     }
 
-    public void setExpDate(Date expDate) {
+    public void setExpDate(String expDate) {
         this.expDate = expDate;
     }
 
@@ -86,7 +94,7 @@ public class Rent {
     }
 
     public String getStatusLabel() {
-        return status==0?"Chưa trả":"Đã trả";
+        return status==0?"repay":"extend";
     }
 
     public Book book(){

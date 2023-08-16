@@ -16,10 +16,11 @@ import javafx.scene.control.DatePicker;
 
 import java.io.IOException;
 import java.net.URL;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
-import java.time.ZoneId;
 import java.util.Date;
 import java.util.ResourceBundle;
+import java.time.format.DateTimeFormatter;
 
 public class RentCreateController implements Initializable {
     public ComboBox<Book> cbBook;
@@ -38,12 +39,16 @@ public class RentCreateController implements Initializable {
 
         try {
             Book book = cbBook.getSelectionModel().getSelectedItem();
+
             LocalDate rentDate = dpRent.getValue();
-            Date rd = Date.from(rentDate.atStartOfDay(ZoneId.systemDefault()).toInstant());
+            String rd = rentDate.toString();
+
             LocalDate expDate = dpExp.getValue();
-            Date ed = Date.from(expDate.atStartOfDay(ZoneId.systemDefault()).toInstant());
-            Rent rent = new Rent(null, book.getId(), rd, ed,null);
+            String ed = expDate.toString();
+
+            Rent rent = new Rent(null, book.getId(), rd, ed,0);
             RentRepository rp = new RentRepository();
+
             if (rp.create(rent)){
                 goRent();
             }else {

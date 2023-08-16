@@ -20,8 +20,8 @@ public class RentRepository implements IRepository<Rent> {
                 list.add(new Rent(
                         rs.getInt("id"),
                         rs.getInt("bookId"),
-                        rs.getDate("rent_date"),
-                        rs.getDate("exp_date"),
+                        rs.getString("rentBook"),
+                        rs.getString("expBook"),
                         rs.getInt("status")
                 ));
             }
@@ -34,7 +34,7 @@ public class RentRepository implements IRepository<Rent> {
     @Override
     public boolean create(Rent rent) {
         try {
-            String sql_txt = "insert into rents(bookId,rent_date,exp_date) value(?,?,?)";
+            String sql_txt = "insert into rents(bookId,rentBook,expBook) value(?,?,?)";
             Connector connector = Connector.getInstance();
             ArrayList arrayList = new ArrayList();
             arrayList.add(rent.getBookId());
@@ -52,10 +52,27 @@ public class RentRepository implements IRepository<Rent> {
     @Override
     public boolean update(Rent rent) {
         try {
-            String sql_txt = "update rents set exp_date=? where id=?";
+            String sql_txt = "update rents set expBook=?, status=? where id=?";
             Connector connector = Connector.getInstance();
             ArrayList arrayList = new ArrayList();
             arrayList.add(rent.getExpDate());
+            arrayList.add(rent.getStatus());
+            arrayList.add(rent.getId());
+            if (connector.execute(sql_txt,arrayList)){
+                return true;
+            }
+        }catch (Exception e){
+            System.out.println(e.getMessage());
+        }
+        return false;
+    }
+
+    public boolean setStatus(Rent rent) {
+        try {
+            String sql_txt = "update rents set status=? where id=?";
+            Connector connector = Connector.getInstance();
+            ArrayList arrayList = new ArrayList();
+            arrayList.add(rent.getStatus());
             arrayList.add(rent.getId());
             if (connector.execute(sql_txt,arrayList)){
                 return true;
